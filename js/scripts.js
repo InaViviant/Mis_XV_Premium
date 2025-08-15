@@ -191,6 +191,72 @@ function toggleMusic() {
     }
 }
 
+// Función para seleccionar opción de asistencia
+function selectAttendance(option) {
+    // Remover selección anterior
+    document.querySelectorAll('.radio-option').forEach(opt => {
+        opt.classList.remove('selected');
+    });
+    
+    // Seleccionar la nueva opción
+    const selectedOption = document.querySelector(`input[value="${option}"]`).closest('.radio-option');
+    selectedOption.classList.add('selected');
+    
+    // Marcar el radio button
+    document.querySelector(`input[value="${option}"]`).checked = true;
+}
+
+// Manejar envío del formulario RSVP
+document.addEventListener('DOMContentLoaded', function() {
+    const rsvpForm = document.getElementById('rsvpForm');
+    
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const attendance = document.querySelector('input[name="attendance"]:checked');
+            
+            // Validar campos
+            if (!firstName || !lastName || !attendance) {
+                showCustomAlert(
+                    '¡Faltan datos! 📝',
+                    'Por favor completá todos los campos obligatorios: nombre, apellido y si vas a asistir.'
+                );
+                return;
+            }
+            
+            // Simular envío
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando... ⏳';
+            
+            setTimeout(() => {
+                const attendanceText = attendance.value === 'yes' ? 'SÍ asistiré' : 'NO podré asistir';
+                
+                showCustomAlert(
+                    '¡Confirmación enviada! ✅',
+                    `Gracias ${firstName} ${lastName}! Tu respuesta "${attendanceText}" ha sido registrada. En un caso real, esta información se guardaría automáticamente en una planilla de Excel con todos los invitados. ¡Te esperamos en la fiesta! 🎉`
+                );
+                
+                // Resetear formulario
+                rsvpForm.reset();
+                document.querySelectorAll('.radio-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }, 2000);
+        });
+    }
+}
+)
+
 // Smooth scrolling para navegación
 document.addEventListener('DOMContentLoaded', function() {
     // Agregar efecto de aparición cuando los elementos entran en pantalla

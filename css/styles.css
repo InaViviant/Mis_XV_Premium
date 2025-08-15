@@ -782,10 +782,138 @@ body {
 }
 
 /* Confirmación */
-.rsvp-info p {
+.rsvp-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.1);
+    border: 2px solid #fef7e8;
+}
+
+.rsvp-form h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #b8860b;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.rsvp-form .form-subtitle {
     font-size: 1.2rem;
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #f0f0f0;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #d4a574;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.attendance-options {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border: 2px solid #f0f0f0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.radio-option:hover {
+    border-color: #d4a574;
+    background: white;
+}
+
+.radio-option.selected {
+    border-color: #d4a574;
+    background: linear-gradient(135deg, #d4a574, #e8c5a0);
+    color: white;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-option .option-icon {
+    font-size: 1.2rem;
+}
+
+.radio-option .option-text {
+    font-weight: 600;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #d4a574, #e8c5a0);
+    color: white;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 2rem auto 0;
+    box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(212, 165, 116, 0.4);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-note {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
 }
 
 .deadline {
@@ -899,21 +1027,20 @@ body {
     }
     
     .carousel-btn.prev {
-        left: -20px;
+        left: 5px;
     }
     
     .carousel-btn.next {
-        right: -20px;
+        right: 5px;
     }
     
-    .contact-info {
-        gap: 1rem;
-    }
-    
-    .contact-item {
-        min-width: 200px;
+    .attendance-options {
         flex-direction: column;
-        text-align: center;
+        align-items: center;
+    }
+    
+    .radio-option {
+        min-width: 200px;
     }
     
     .bank-item {
@@ -960,11 +1087,11 @@ body {
     }
 
     .carousel-btn.prev {
-        left: -15px;
+        left: 5px;
     }
     
     .carousel-btn.next {
-        right: -15px;
+        right: 5px;
     }
 }
 
@@ -1000,11 +1127,11 @@ body {
     }
 
     .carousel-btn.prev {
-        left: -10px;
+        left: 5px;
     }
     
     .carousel-btn.next {
-        right: -10px;
+        right: 5px;
     }
 
     .share-instructions {

@@ -386,3 +386,196 @@ rippleStyle.textContent = `
     }
 `;
 document.head.appendChild(rippleStyle);
+
+ // Variables para controles de música
+        const music = document.getElementById('background-music');
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercentage = document.getElementById('volumePercentage');
+
+        let isPlaying = false;
+        let showingVolumeControl = false;
+
+        // Configuración inicial del volumen
+        music.volume = 0.5;
+        updateVolumeSliderBackground();
+
+        // Toggle música
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    updateMusicIcon();
+                }).catch(error => {
+                    console.log('Error reproduciendo música:', error);
+                });
+            } else {
+                music.pause();
+                isPlaying = false;
+                updateMusicIcon();
+            }
+        }
+
+        // Actualizar icono del botón de música
+        function updateMusicIcon() {
+            if (music.volume === 0) {
+                musicToggle.textContent = '🔇';
+            } else if (isPlaying) {
+                musicToggle.textContent = music.volume < 0.5 ? '🔉' : '🔊';
+            } else {
+                musicToggle.textContent = '🔇';
+            }
+        }
+
+        // Mostrar/ocultar control de volumen
+        function toggleVolumeControl() {
+            showingVolumeControl = !showingVolumeControl;
+            if (showingVolumeControl) {
+                volumeControl.classList.add('show');
+            } else {
+                volumeControl.classList.remove('show');
+            }
+        }
+
+        // Actualizar el fondo del slider basado en el valor
+        function updateVolumeSliderBackground() {
+            const value = volumeSlider.value;
+            const percentage = (value / 100) * 100;
+            volumeSlider.style.background = `linear-gradient(to right, #d4a574 0%, #e8c5a0 ${percentage}%, #f0f0f0 ${percentage}%, #f0f0f0 100%)`;
+        }
+
+        // Control de volumen
+        function updateVolume() {
+            const volume = volumeSlider.value / 100;
+            music.volume = volume;
+            volumePercentage.textContent = Math.round(volume * 100) + '%';
+            updateVolumeSliderBackground();
+            updateMusicIcon();
+        }
+
+        // Event listeners
+        musicToggle.addEventListener('click', toggleMusic);
+
+        // Click en el botón de música para mostrar controles
+        musicToggle.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            toggleVolumeControl();
+        });
+
+        // Doble click para mostrar controles de volumen
+        musicToggle.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+            toggleVolumeControl();
+        });
+
+        // Hover para mostrar controles de volumen
+        let hoverTimeout;
+        musicToggle.addEventListener('mouseenter', () => {
+            hoverTimeout = setTimeout(() => {
+                if (!showingVolumeControl) {
+                    toggleVolumeControl();
+                }
+            }, 1000); // Mostrar después de 1 segundo de hover
+        });
+
+        musicToggle.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeout);
+        });
+
+        // Control del slider de volumen
+        volumeSlider.addEventListener('input', updateVolume);
+
+        // Cerrar controles de volumen al hacer click fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.music-controls') && showingVolumeControl) {
+                toggleVolumeControl();
+            }
+        });
+
+        // Atajos de teclado
+        document.addEventListener('keydown', (e) => {
+            // Espaciadora para pause/play
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                toggleMusic();
+            }
+            
+            // Flecha arriba/abajo para volumen
+            if (e.code === 'ArrowUp') {
+                e.preventDefault();
+                const newVolume = Math.min(100, parseInt(volumeSlider.value) + 10);
+                volumeSlider.value = newVolume;
+                updateVolume();
+                if (!showingVolumeControl) {
+                    toggleVolumeControl();
+                }
+            }
+            
+            if (e.code === 'ArrowDown') {
+                e.preventDefault();
+                const newVolume = Math.max(0, parseInt(volumeSlider.value) - 10);
+                volumeSlider.value = newVolume;
+                updateVolume();
+                if (!showingVolumeControl) {
+                    toggleVolumeControl();
+                }
+            }
+            
+            // M para mutear
+            if (e.code === 'KeyM') {
+                e.preventDefault();
+                if (music.volume > 0) {
+                    volumeSlider.dataset.previousVolume = volumeSlider.value;
+                    volumeSlider.value = 0;
+                } else {
+                    volumeSlider.value = volumeSlider.dataset.previousVolume || 50;
+                }
+                updateVolume();
+            }
+        });
+
+        // Inicializar
+        updateMusicIcon();
+
+        // Tooltip para explicar cómo mostrar controles
+        let tooltipTimeout;
+        musicToggle.addEventListener('mouseenter', () => {
+            tooltipTimeout = setTimeout(() => {
+                // Crear tooltip
+                const tooltip = document.createElement('div');
+                tooltip.textContent = 'Mantén presionado para controles de volumen';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    bottom: 70px;
+                    right: 0;
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    pointer-events: none;
+                    z-index: 1001;
+                `;
+                tooltip.className = 'music-tooltip';
+                
+                // Eliminar tooltip anterior si existe
+                const existingTooltip = document.querySelector('.music-tooltip');
+                if (existingTooltip) {
+                    existingTooltip.remove();
+                }
+                
+                musicToggle.parentElement.appendChild(tooltip);
+                
+                setTimeout(() => {
+                    if (tooltip.parentElement) {
+                        tooltip.remove();
+                    }
+                }, 3000);
+            }, 2000);
+        });
+
+        musicToggle.addEventListener('mouseleave', () => {
+            clearTimeout(tooltipTimeout);
+        });

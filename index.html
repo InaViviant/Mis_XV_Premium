@@ -299,9 +299,30 @@
         🔇
     </button>
 
+    <!-- Controles de Música -->
+    <div class="music-controls">
+        <div class="volume-control" id="volumeControl">
+            <div class="volume-header">
+                <span>🎵</span>
+                <span>Volumen</span>
+            </div>
+            <div class="volume-slider-container">
+                <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+            </div>
+            <div class="volume-labels">
+                <span>🔇</span>
+                <span>🔊</span>
+            </div>
+            <div class="volume-percentage" id="volumePercentage">50%</div>
+        </div>
+        <button class="music-toggle" id="musicToggle" title="Reproducir/Pausar música">
+            🔇
+        </button>
+    </div>
+
     <!-- Audio de fondo -->
     <audio id="background-music" loop>
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <source src="song/TercerCielo.mp3" type="audio/wav">
     </audio>
 
     <script src="js/scripts.js"></script>

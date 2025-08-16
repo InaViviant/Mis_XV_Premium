@@ -259,6 +259,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Smooth scrolling para navegación
 document.addEventListener('DOMContentLoaded', function() {
+    // Efecto parallax
+    initParallaxEffect();
+    
     // Agregar efecto de aparición cuando los elementos entran en pantalla
     const observerOptions = {
         threshold: 0.1,
@@ -286,6 +289,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // Efecto de partículas flotantes
     createFloatingParticles();
 });
+
+// Inicializar efecto parallax
+function initParallaxEffect() {
+    const parallaxBg = document.querySelector('.parallax-bg');
+    const presentacionSection = document.getElementById('presentacion');
+    
+    if (!parallaxBg || !presentacionSection) return;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const sectionHeight = presentacionSection.offsetHeight;
+        const sectionTop = presentacionSection.offsetTop;
+        
+        // Solo aplicar el efecto cuando la sección está visible
+        if (scrolled < sectionHeight + sectionTop) {
+            const parallaxSpeed = 0.5;
+            const yPos = scrolled * parallaxSpeed;
+            
+            // Aplicar transformación
+            parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            
+            // Calcular opacidad basada en el scroll
+            const opacity = Math.max(0, 1 - (scrolled / sectionHeight));
+            parallaxBg.style.opacity = opacity;
+        }
+    }
+    
+    // Usar requestAnimationFrame para mejor rendimiento
+    let ticking = false;
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    function handleScroll() {
+        requestTick();
+        ticking = false;
+    }
+    
+    // Escuchar el evento scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Ejecutar una vez al cargar
+    updateParallax();
+}
 
 // Crear partículas flotantes decorativas
 function createFloatingParticles() {

@@ -1,55 +1,54 @@
-# 🎉 Invitación Web de Cumpleaños de 15
+# 🎉 Invitación Virtual Premium - 15 Años  
 
-Este proyecto es una **invitación interactiva** para cumpleaños de 15 años, totalmente personalizable.  
-Incluye animaciones, cuenta regresiva, galería de fotos, secciones editables y diseño responsive.
+Este proyecto es una **invitación virtual premium de cumpleaños de 15** ✨.  
+Fue desarrollada **100% con HTML, CSS y JavaScript**, sin frameworks, para garantizar ligereza, compatibilidad y facilidad de personalización.  
 
-Ideal para vender a clientes que quieran una invitación única y adaptada a su evento.
-
----
-
-## ✨ Características
-
-- **Diseño elegante y animado** con transiciones suaves y efectos visuales.
-- **Cuenta regresiva** hasta el día y hora del evento.
-- **Sección de fecha y hora** con opción de agregar al calendario.
-- **Ubicación del evento** con botón para ver en Google Maps.
-- **Código de vestimenta** con iconos ilustrativos.
-- **Galería de fotos** tipo carrusel.
-- **Sección para compartir fotos** vía enlace (Google Drive u otra plataforma).
-- **Datos de regalo** con botón para copiar al portapapeles.
-- **Confirmación de asistencia** con contacto por WhatsApp o email.
-- **Música de fondo** opcional.
-- **Compatible con dispositivos móviles**.
+🔗 **Demo en vivo:** [Mis XV Premium](https://inaviviant.github.io/Mis_XV_Premium)  
 
 ---
 
-## 📂 Estructura de Archivos
+## 📌 Características  
+
+- Diseño **elegante y moderno**, adaptado para cualquier dispositivo (responsive).  
+- Efectos visuales y animaciones suaves hechas con CSS y JavaScript.  
+- **Interactividad**: botones, secciones dinámicas y detalles únicos para destacar la celebración.  
+- Totalmente **editable** para personalizar:  
+  - Nombre de la quinceañera  
+  - Fecha y hora del evento  
+  - Ubicación  
+  - Colores, imágenes y estilo  
+
+---
+
+## 🚀 Tecnologías utilizadas  
+
+- **HTML5** → estructura del sitio  
+- **CSS3** → estilos, animaciones y diseño responsivo  
+- **JavaScript** → interactividad y efectos  
+
+
+---
+
+## 📂 Estructura de archivos  
 
 ```
-/
-├── index.html          # Estructura principal de la invitación
-├── css/
-│   └── styles.css      # Estilos y diseño visual
-├── js/
-│   └── scripts.js      # Funciones interactivas y animaciones
-├── assets/             # Imágenes del carrusel y decorativas
-├── music/              # Archivo de música opcional
-└── README.md           # Este archivo
+📁 Mis_XV_Premium
+ ┣ 📄 index.html      # Página principal de la invitación
+ ┣ 📄 styles.css      # Estilos y diseño
+ ┣ 📄 scripts.js      # Funciones e interactividad
+ ┣ 📁 assets/         # Imágenes, íconos y recursos
 ```
+*(Ajusta los nombres de archivos/carpetas si difieren en tu proyecto.)*
+
+---
+
+## ✨ Uso recomendado  
+
+- Ideal para enviar por **WhatsApp, redes sociales o correo electrónico**.  
+- Funciona en navegadores modernos de celular y PC.  
+- No requiere instalación ni configuraciones externas.  
 
 ---
 
 
-## 🌐 Demo
-
-Puedes ver una demostración alojándola en GitHub Pages o cualquier servidor web.
-
-Ejemplo de URL con GitHub Pages:  
-```
-https://inaviviant.github.io/Mis_XV_Premium/
-```
-
----
-
-
-💖 *Hecha con cariño para que tu evento brille tanto como tú.*
+💖 **Crea recuerdos inolvidables con una invitación única y premium.**
